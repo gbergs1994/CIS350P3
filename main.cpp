@@ -80,6 +80,28 @@ void primMST(int graph[V][V])
 
 int main()
 {
+    
+    int xNodes;
+    int yEdges;
+
+    ifstream myfile;
+
+    myfile.open("CIS-Land1.dat");
+    if (myfile.is_open()){
+
+        myfile >> xNodes;
+        myfile >> yEdges;
+        
+
+
+
+
+    }
+    else {
+        cout << "Unable to open file";
+    }
+    
+    
     int graph[V][V] = { { 0, 2, 0, 6, 0 },
                         { 2, 0, 3, 8, 5 },
                         { 0, 3, 0, 0, 7 },
