@@ -80,12 +80,89 @@ void primMST(int graph[V][V])
 
 int main()
 {
-    
+    string fileName, dataFileName;
+
+    cout << "Welcome to the MST Test Program" << endl;
+    cout << "Enter output file name: " << endl;
+    cin >> fileName;
+
     int xNodes;
     int yEdges;
 
+    ofstream outFile;
+    outFile.open(fileName);
+    if (!outFile.is_open()) {
+        cout << "file<" << fileName << "> cannot be opened - program terminated" << endl;
+        return 0;
+    }
+
+    outFile << "Welcome to the MST Test Program" << endl;
+    cout << "Testing Default Scenario" << endl;
+    outFile << "Testing Default Scenario" << endl;
+    
+    //Create an empty graph and test functionality – No MST
+
+    cout << "Testing File Data" << endl;
+    outFile << "Testing File Data" << endl;
+    cout << "Enter file name for graph data: " << endl;
+    cin >> dataFileName;
+    outFile << "File name for graph data: <" << dataFileName << ">" << endl;
+
+    ifstream data;
+
+    data.open(dataFileName);
+    if (!data.is_open()) {
+        cout << "file <" << dataFileName << "> cannot be opened or does not exist - program terminated" << endl;
+    }
+    //else if(file exists but is empty) {cout << "file <" << dataFileName << "> contains no data - program terminated"}
+
+    data >> xNodes;
+    data >> yEdges;
+    
+    if (xNodes < 0) {
+        cout << "ERROR: number of vertices: <" << xNodes << "> is less than zero" << endl;
+        outFile << "ERROR: number of vertices: <" << xNodes << "> is less than zero" << endl;
+        cout << "Empty graph will be created" << endl;
+        outFile << "Empty graph will be created" << endl;
+        //Create an empty graph
+    }
+    else if (xNodes == 0 ) {
+        cout << "Number of vertices: <" << xNodes << "> is equal to zero" << endl;
+        outFile << "Number of vertices: <" << xNodes << "> is equal to zero" << endl;
+        cout << "Empty graph will be created" << endl;
+        outFile << "Empty graph will be created" << endl;
+        //Create an empty graph
+    }
+    else if (xNodes > 0) {
+        cout << "Number of vertices: <" << xNodes << "> is greater than zero" << endl;
+        outFile << "Number of vertices: <" << xNodes << "> is greater than zero" << endl;
+    }
+
+    if (yEdges < (xNodes -1)) {
+        cout << "ERROR: <" << xNodes << "> edges invalid to create connected graph" << endl;
+        outFile << "ERROR: <" << xNodes << "> edges invalid to create connected graph" << endl;
+        //Create empty graph
+        if (yEdges < 0) {
+            //program will treat as zero edges – file will not contain edges
+        }
+    }
+    else {
+        cout << "Graph with <" << xNodes << "> and <" << yEdges << "> will be created " << endl;
+        outFile << "Graph with <" << xNodes << "> and <" << yEdges << "> will be created " << endl;
+        //Creat graph with specified number of vertices
+    }
+
+    cout << "Number of input edges to process is: <" << yEdges << ">" << endl;
+    outFile << "Number of input edges to process is: <" << yEdges << ">" << endl;
+    
+    //CONTINUE HERE
+    
+
+
+
     ifstream myfile;
 
+    //myfile.open(fileName);
     myfile.open("CIS-Land1.dat");
     if (myfile.is_open()){
 
@@ -98,7 +175,7 @@ int main()
 
     }
     else {
-        cout << "Unable to open file";
+        cout << "file<" << fileName << "> cannot be opened - program terminated" << endl;
     }
     
     
