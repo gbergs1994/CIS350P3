@@ -88,6 +88,9 @@ int main()
 
     int xNodes;
     int yEdges;
+    int source;
+    int destination;
+    int weight;
 
     ofstream outFile;
     outFile.open(fileName);
@@ -139,8 +142,8 @@ int main()
     }
 
     if (yEdges < (xNodes -1)) {
-        cout << "ERROR: <" << xNodes << "> edges invalid to create connected graph" << endl;
-        outFile << "ERROR: <" << xNodes << "> edges invalid to create connected graph" << endl;
+        cout << "ERROR: <" << yEdges << "> edges invalid to create connected graph" << endl;
+        outFile << "ERROR: <" << yEdges << "> edges invalid to create connected graph" << endl;
         //Create empty graph
         if (yEdges < 0) {
             //program will treat as zero edges – file will not contain edges
@@ -149,14 +152,53 @@ int main()
     else {
         cout << "Graph with <" << xNodes << "> and <" << yEdges << "> will be created " << endl;
         outFile << "Graph with <" << xNodes << "> and <" << yEdges << "> will be created " << endl;
-        //Creat graph with specified number of vertices
+        //Creat graph with specified number of vertices and edges
     }
 
     cout << "Number of input edges to process is: <" << yEdges << ">" << endl;
     outFile << "Number of input edges to process is: <" << yEdges << ">" << endl;
     
-    //CONTINUE HERE
-    
+    //attempt to add all edges from the input file to the graph
+
+    for (int i = 0; i < yEdges; i++) {
+
+        data >> source;
+        data >> destination;
+        data >> weight;
+
+        cout << "Source: " << source << endl;
+        cout << "Destination: " << destination << endl;
+        cout << "Weight: " << weight<< endl;
+
+        if (weight == 0) {
+            cout << "Empty Graph - Cannot Add Edge: <" << source << ">, <" << destination << ">, <" << weight << ">" << endl;
+            outFile << "Empty Graph - Cannot Add Edge: <" << source << ">, <" << destination << ">, <" << weight << ">" << endl;
+        
+        }
+        else if ((source < 0) or (source > xNodes)) {
+            cout <<  "Invalid Source or Destination Vertex - Cannot Add Edge: <" << source << ">, <" << destination << ">, <" << weight << "> - Edge request ignored" << endl;
+            outFile <<  "Invalid Source or Destination Vertex - Cannot Add Edge: <" << source << ">, <" << destination << ">, <" << weight << "> - Edge request ignored" << endl;
+
+        }
+        else if (weight < 0) {
+            cout << "Invalid Weight - Cannot Add Edge: <" << source << ">, <" << destination << ">, <" << weight << "> - Edge request ignored" << endl; 
+            outFile << "Invalid Weight - Cannot Add Edge: <" << source << ">, <" << destination << ">, <" << weight << "> - Edge request ignored" << endl;
+        }
+        else {
+            //Edge can be added to graph undirected graph so there are two edges added to graph adjacency list
+            cout << "Edge Added: <" << source << ">, <" << destination << ">, <" << weight << ">" << endl;
+            outFile << "Edge Added: <" << source << ">, <" << destination << ">, <" << weight << ">" << endl;
+        }
+
+    }
+
+    /*Print the full graph adjacency list
+    display message “Full Graph – Adjacency List” to user and output file
+    For each vertex display graph adjacency list to user and output file in format
+    Adj[vertex] -> (destination1, cost1) (destination2, cost2) */
+
+
+
 
 
 

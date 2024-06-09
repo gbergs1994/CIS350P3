@@ -1,4 +1,0 @@
-Welcome to the MST Test Program
-Testing Default Scenario
-Testing File Data
-File name for graph data: <CIS-Land5.dat>
