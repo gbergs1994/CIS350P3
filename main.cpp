@@ -86,6 +86,7 @@ int main()
     cout << "Enter output file name: " << endl;
     cin >> fileName;
 
+    int graph[0][0];
     int xNodes;
     int yEdges;
     int source;
@@ -104,6 +105,11 @@ int main()
     outFile << "Testing Default Scenario" << endl;
     
     //Create an empty graph and test functionality – No MST
+    int testGraph [5][5] = { { 0, 0, 0, 0, 0 },
+                             { 0, 0, 0, 0, 0 },
+                             { 0, 0, 0, 0, 0 },
+                             { 0, 0, 0, 0, 0 },
+                             { 0, 0, 0, 0, 0 } };
 
     cout << "Testing File Data" << endl;
     outFile << "Testing File Data" << endl;
@@ -117,7 +123,9 @@ int main()
     if (!data.is_open()) {
         cout << "file <" << dataFileName << "> cannot be opened or does not exist - program terminated" << endl;
     }
-    //else if(file exists but is empty) {cout << "file <" << dataFileName << "> contains no data - program terminated"}
+    else if(data.is_open() && data.peek() == data.eof()) {
+        cout << "file <" << dataFileName << "> contains no data - program terminated" << endl;
+    }
 
     data >> xNodes;
     data >> yEdges;
@@ -128,6 +136,7 @@ int main()
         cout << "Empty graph will be created" << endl;
         outFile << "Empty graph will be created" << endl;
         //Create an empty graph
+        int graph [0][0];
     }
     else if (xNodes == 0 ) {
         cout << "Number of vertices: <" << xNodes << "> is equal to zero" << endl;
@@ -135,6 +144,7 @@ int main()
         cout << "Empty graph will be created" << endl;
         outFile << "Empty graph will be created" << endl;
         //Create an empty graph
+        int graph [0][0];
     }
     else if (xNodes > 0) {
         cout << "Number of vertices: <" << xNodes << "> is greater than zero" << endl;
@@ -145,14 +155,17 @@ int main()
         cout << "ERROR: <" << yEdges << "> edges invalid to create connected graph" << endl;
         outFile << "ERROR: <" << yEdges << "> edges invalid to create connected graph" << endl;
         //Create empty graph
+        int graph [0][0];
         if (yEdges < 0) {
             //program will treat as zero edges – file will not contain edges
+            int graph [xNodes][xNodes];
         }
     }
     else {
         cout << "Graph with <" << xNodes << "> and <" << yEdges << "> will be created " << endl;
         outFile << "Graph with <" << xNodes << "> and <" << yEdges << "> will be created " << endl;
         //Creat graph with specified number of vertices and edges
+        int graph [xNodes][xNodes];
     }
 
     cout << "Number of input edges to process is: <" << yEdges << ">" << endl;
@@ -165,6 +178,8 @@ int main()
         data >> source;
         data >> destination;
         data >> weight;
+
+        graph[source][destination] = weight;
 
         cout << "Source: " << source << endl;
         cout << "Destination: " << destination << endl;
@@ -193,11 +208,12 @@ int main()
     }
 
     /*Print the full graph adjacency list
-    display message “Full Graph – Adjacency List” to user and output file
+    cout << "Full Graph - Adjacency List" << endl;
+    outFile << "Full Graph - Adjacency List" << endl;
     For each vertex display graph adjacency list to user and output file in format
     Adj[vertex] -> (destination1, cost1) (destination2, cost2) */
 
-
+    
 
 
 
@@ -217,18 +233,24 @@ int main()
 
     }
     else {
-        cout << "file<" << fileName << "> cannot be opened - program terminated" << endl;
+        cout << "file <" << fileName << "> cannot be opened - program terminated" << endl;
     }
     
     
-    int graph[V][V] = { { 0, 2, 0, 6, 0 },
-                        { 2, 0, 3, 8, 5 },
-                        { 0, 3, 0, 0, 7 },
-                        { 6, 8, 0, 0, 9 },
-                        { 0, 5, 7, 9, 0 } };
+    int testgraph[V][V] = { { 0, 2, 0, 6, 0 },
+                            { 2, 0, 3, 8, 5 },
+                            { 0, 3, 0, 0, 7 },
+                            { 6, 8, 0, 0, 9 },
+                            { 0, 5, 7, 9, 0 } };
  
     // Print the solution
-    primMST(graph);
- 
+    primMST(testgraph);
+
+    cout << "Thank you for running the MST Test Program written by Gunnar Bergstrom!" << endl;
+    outFile << "Thank you for running the MST Test Program written by Gunnar Bergstrom!" << endl;
+
+
+    //outFile.close();
+
     return 0;
 }

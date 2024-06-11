@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "iostream": "cpp",
-        "list": "cpp"
+        "list": "cpp",
+        "array": "cpp",
+        "any": "cpp",
+        "string_view": "cpp",
+        "regex": "cpp"
     }
 }
